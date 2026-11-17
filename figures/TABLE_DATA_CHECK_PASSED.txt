@@ -1,0 +1,22 @@
+TABLE DATA CHECK PASSED
+
+校验脚本：figures/check_table_data.py
+校验对象：figures/TABLE_*.tex 共 13 张三线表
+数值单元格总数：335
+结果：335/335 均可溯源到 figures/*.json 中的具体字段，无手写数字。
+
+校验口径
+- 把 figures 下 12 个 JSON 递归摊平成数值池，对每个单元格按其显示位数
+  四舍五入后在池中寻找完全相等的源数值。
+- 只容许两类已在表注中声明的换算：百分比列的 ×100（源字段为
+  grid_convergence.rel_diff 等以小数存储的相对量），以及守恒残差列的
+  %.3e 科学计数法显示。
+- 表头、时间标签等非数值单元格不计入 335，但其内容同样取自 JSON
+  （table_radii_cm / table_times_s / table_times_h / table6.columns /
+  file_last_column）。
+
+LaTeX 结构校验
+- figures/TABLE_*.tex 全部 13 张已用 pdflatex 编译通过（13 页，exit 0），
+  验证 booktabs 三线结构、列数对齐、下划线转义与数学模式记号无误。
+- 本机 TeX 的 expl3 过旧，ctexart 与 xeCJK 均无法加载，故编译校验在
+  剔除中文字符后进行；中文文本本身不参与语法判定。

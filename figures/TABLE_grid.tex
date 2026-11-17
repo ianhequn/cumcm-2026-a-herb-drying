@@ -1,0 +1,17 @@
+\begin{table}[H]
+  \centering
+  \caption{问题三网格收敛性}
+  \label{tab:grid}
+  \begin{tabular}{rrr}
+    \toprule
+    径向控制体数 $N$ & $t_{\mathrm{dry}}$ (h) & 相对前一档差 (\%) \\
+    \midrule
+    48 & 57.2968 & -- \\
+    80 & 57.3738 & 0.1343 \\
+    112 & 57.4040 & 0.0527 \\
+    160 & 57.4247 & 0.0360 \\
+    224 & 57.4370 & 0.0214 \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}\footnotesize 数据来源：figures/problem\_3\_results.json 的 grid\_convergence (.N / .t\_dry\_h / .rel\_diff)；百分比列为 rel\_diff 乘 100。
+\end{table}

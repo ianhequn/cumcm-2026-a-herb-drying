@@ -1,0 +1,23 @@
+\begin{table}[H]
+  \centering
+  \caption{单因子灵敏度汇总}
+  \label{tab:sensitivity}
+  \begin{tabular}{lrr}
+    \toprule
+    扰动工况 & $t_{\mathrm{dry}}$ (h) & 相对基准 (\%) \\
+    \midrule
+    基准（问题三） & 57.4040 & 0.0000 \\
+    $T_{\mathrm{air}}$+0.5 °C & 56.4813 & -1.6075 \\
+    $T_{\mathrm{air}}$-0.5 °C & 58.3477 & 1.6439 \\
+    $W_{\mathrm{air}}$+0.004 kg/kg & 57.5144 & 0.1923 \\
+    $W_{\mathrm{air}}$-0.004 kg/kg & 57.3029 & -0.1762 \\
+    $h_m$ $\times$1.2 & 56.3565 & -1.8249 \\
+    $h_m$ $\times$0.8 & 59.1107 & 2.9730 \\
+    h $\times$1.2 & 57.3910 & -0.0227 \\
+    h $\times$0.8 & 57.4238 & 0.0343 \\
+    $R(t)$ $\times$1.05（基准问题四） & 55.8023 & 9.2725 \\
+    $R(t)$ $\times$0.95（基准问题四） & 46.5590 & -8.8277 \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}\footnotesize 数据来源：figures/sensitivity\_results.json 的 rows (.label / .t\_dry\_h / .rel\_pct)；每行均按 meta.recompute=full\_simulation\_per\_row 全程重算。末两行以问题四为基准（baseline\_q4\_h=51.0671 h），其余以问题三为基准（baseline\_q3\_h=57.4040 h）。
+\end{table}

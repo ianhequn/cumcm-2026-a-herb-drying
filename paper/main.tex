@@ -1,0 +1,158 @@
+% 国赛 (CUMCM) 2026 兼容模板
+% 基于社区维护的 latexstudio/CUMCMThesis，并以全国组委会 2026 格式规范为准。
+% cumcmthesis 不是组委会指定的唯一 TeX 模板。
+% 电子版提交使用 withoutpreface 去掉封面编号页，bwprint 黑白打印
+\documentclass[withoutpreface,bwprint]{cumcmthesis}
+
+% === 额外宏包（cumcmthesis 已内置 amsmath/graphicx/booktabs/listings/hyperref/tabularx/longtable 等）===
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[section]{placeins}
+\usepackage{needspace}
+\usepackage{algorithm2e}
+
+% === 参考文献引用（数字型，配合 gbt7714-numerical.bst）===
+%  不要加载 cite 宏包 — 它与 natbib 冲突会导致编译错误。
+%  必须显式加载 natbib：gbt7714-numerical.bst 产出的是 natbib 风格条目
+%    （\bibitem[作者(年)]{key}），不加载 natbib 时标准 \cite 会把“作者-年”当引用标记
+%    上标出来（而非数字 [1]）。numbers 模式让 \cite 产出数字，cls 的 \upcite 再上标它。
+%    正文引用统一用 \upcite{key} 得数字上标 $^{[1]}$。
+\usepackage[numbers,sort&compress]{natbib}
+
+% === TikZ（cumcmthesis 已加载 tikz，这里只加额外库）===
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+
+% === 代码高亮设置 ===
+\lstset{
+    language=Python,
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+}
+
+% === 摘要后排版修复 ===
+%  不再重定义 \@cite —— 引用交给 natbib（上面已 numbers 模式加载），
+%    \upcite 会正确产出数字上标；旧的 \@cite hack 在 natbib 下无效且会干扰，已移除。
+\makeatletter
+% === 修复摘要后排版（cls 的 abstract 结束时有 \newpage\null，可能产生空白页）===
+% 方案：abstract 结束时只换页，不加 \null；正文不生成目录。
+\renewenvironment{abstract}{%
+  \if@twocolumn\section*{\abstractname}%
+  \else\begin{center}{\zihao{3}\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}\end{center}\quotation
+  \fi}{\if@twocolumn\else\endquotation\newpage\fi}
+\makeatother
+
+% === 竞赛信息（电子版提交时注释掉）===
+% \tihao{A}
+% \baominghao{xxxx}
+% \schoolname{[学校名称]}
+% \membera{[成员A]}
+% \memberb{[成员B]}
+% \memberc{[成员C]}
+% \supervisor{[指导老师]}
+% \yearinput{[竞赛年份]}
+% \monthinput{[月]}
+% \dayinput{[日]}
+
+\title{药材热风烘干的热质耦合输运模型与烘干时长预测}
+
+% MH-FLOAT-TUNE 受控浮动调参（防整页空白/一页一图）
+% placeins 已由模板/cls 加载，此处不重复注入（避免 Option clash）
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.06}
+\renewcommand{\floatpagefraction}{0.72}
+\renewcommand{\dbltopfraction}{0.92}
+\renewcommand{\dblfloatpagefraction}{0.72}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+% 正文使用自然页底；避免强制齐底造成的无信息留白。
+\raggedbottom
+\begin{document}
+
+\maketitle
+
+% === 摘要 ===
+\begin{abstract}
+
+药材内部的温度与含水率无法实测，可调的工艺量只有送风温度与含湿量，
+故需用数学模型代替逐一试烘。
+
+针对问题一，建立一维轴对称热-质耦合输运模型：两场均以第三类边界条件与热风
+耦合，传质驱动力直接取空气含湿量，避免自拟题设之外的吸附等温线。空间上采用
+\textbf{节点中心有限体积}格式使表面 Robin 条件以原始形式进入方程组，
+时间上用后向 Euler
+格式配合 Picard 迭代。热 Biot 数 $1.3889$ 表明内外热阻相当。温度方程在常物性
+下线性且与水分方程解耦，据此推导减法形式的\textbf{Bessel--Duhamel 解析解}
+作独立校验，最大偏差仅 $5.224\times10^{-4}$ °C。$1800$ s 时中心温度
+$33.5757$ °C、表面 $36.7857$ °C；中心含水率仍为 $2.5500$ kg/kg、表面已降到
+$1.5103$ kg/kg，预热段仅排出初始水分的 $10.06\%$。
+
+针对问题二，物性全程统一采用附录 3，其扩散系数含 Arrhenius 因子，温度由
+$28$ °C 升到 $50$ °C 使之增大为原来的 $2.39$ 倍。$3$ h 时中心含水率降到
+$\mathbf{1.7662}$ kg/kg，同期内外温差由 $0.5$ h 的 $3.2235$ °C 收缩到
+$0.1169$ °C，说明该时窗内\textbf{热已基本平衡而质仍在进行}；
+由此判断后两问的烘干时长主要由传质控制，温度的作用主要经扩散系数传递。
+
+针对问题三，把“各处水分浓度低于 $0.15$ kg/kg”定义为作用在空间最大值上的
+\textbf{逐点首达判据}。程序按全域最大值判定；各算例的含水率剖面均沿半径单调
+递减，故该场判据与中心判据给出同一时刻。按相邻输出步线性插值求得烘干时长
+$\mathbf{57.4247}$ h，
+即 $2.3927$ d，落在题面所给 $2$ 至 $3$ 天区间内，全程离散守恒残差
+$3.425\times10^{-10}$。若误用截面平均判据则得约 $36$ h，短 $37\%$，
+而该时刻中心仍有 $0.1858$ kg/kg 未达标。
+
+针对问题四，为处理收缩动边界，定义\textbf{干质量拉格朗日坐标}
+$s=(r/R(t))^2$，把收缩降格为方程与表面通量中两个已知的标量系数，
+既不产生伪对流项，也消去柱坐标在轴心的奇点，四问由此共用同一求解器。
+取附录 4 物性并按附件 2 令
+半径由 $2.000$ cm 收缩（全程最小 $1.198$ cm，$35$ h 后已冻结在 $1.200$ cm），
+求得 $\mathbf{51.0711}$ h，
+即 $2.1280$ d，较定域情形仅短 $11.0\%$。通过 $2\times2$ 消融实验把这一净变化
+拆为物性效应 $+126.0\%$、收缩效应 $-56.1\%$ 与\textbf{交互项 $-46.5145$ h}，
+说明两机制不可线性叠加，收缩才是最强的单一因素；灵敏度排序
+$R\gg h_m>T_{\mathrm{air}}\gg W_{\mathrm{air}}\gg h$ 与半径弹性 $1.810$
+与这一判断一致。
+
+\keywords{热质耦合输运\quad 干质量拉格朗日坐标\quad 节点中心有限体积\quad
+阈值首达时刻\quad 消融实验}
+\end{abstract}
+
+% === 摘要与正文之间的换页 ===
+%  不要在这里加回 \tableofcontents：竞赛论文统一不出目录页。
+% abstract 环境结尾已经换页；这里不再重复 \clearpage，避免空白页边缘情况。
+
+% === 正文 ===
+% 这两个标签只供编译合规检查精确计算 CUMCM 正文页数，不显示在论文中。
+\label{mh:body-start}
+\input{sections/1_restatement}
+\input{sections/2_analysis}
+\input{sections/3_assumptions}
+\input{sections/4_symbols}
+\input{sections/5_model}
+\input{sections/6_problem1}
+\input{sections/7_problem2}
+\input{sections/8_problem3}
+\input{sections/9_problem4}
+\input{sections/10_validation}
+\input{sections/11_evaluation}
+
+% === 参考文献 ===
+% AI 工具使用声明由 build_ai_disclosure.py 自动插入到本环境之前。
+% === AI 工具使用声明（自动插入）===
+\input{sections/Z_ai_disclosure}
+\begin{thebibliography}{99}
+\input{sections/Y_references}
+\end{thebibliography}
+\label{mh:body-end}
+
+% === 附录 ===
+\begin{appendices}
+\input{sections/A_code}
+\input{sections/B_extended}
+\input{sections/C_validation_detail}
+\end{appendices}
+
+\end{document}

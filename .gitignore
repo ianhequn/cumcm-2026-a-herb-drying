@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Local and competition-only artifacts
+_tmp/
+RESULTS/
+*.zip
+*.rar
+*.7z
+
+# Bundled fonts and historic review PDFs
+paper/simsun.ttc
+paper/simkai.ttf
+paper/_improvement_rounds/
+
+# Recreated by code/main.py; canonical per-problem results remain tracked
+figures/all_results.json
+figures/q1_results.json
+figures/q2_results.json
+figures/q3_results.json
+figures/q4_results.json
+figures/constraint_audit.json

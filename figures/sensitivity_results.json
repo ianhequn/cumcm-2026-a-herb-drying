@@ -1,0 +1,113 @@
+{
+ "meta": {
+  "problem": 3,
+  "section": "sensitivity",
+  "n_cells": 112,
+  "dt_s": 1.0,
+  "recompute": "full_simulation_per_row",
+  "n_rows": 11,
+  "runtime_s": 452.72
+ },
+ "baseline_q3_h": 57.404046079788614,
+ "baseline_q4_h": 51.067065801282205,
+ "rows": [
+  {
+   "label": "基准（问题三）",
+   "driver": "baseline",
+   "t_dry_h": 57.404046079788614,
+   "rel_pct": 0.0
+  },
+  {
+   "label": "T_air+0.5 °C",
+   "driver": "T_air_up",
+   "t_dry_h": 56.48127586699,
+   "rel_pct": -1.6075002997454366
+  },
+  {
+   "label": "T_air-0.5 °C",
+   "driver": "T_air_down",
+   "t_dry_h": 58.34771024162444,
+   "rel_pct": 1.6438983421555038
+  },
+  {
+   "label": "W_air+0.004 kg/kg",
+   "driver": "W_air_up",
+   "t_dry_h": 57.514433749571594,
+   "rel_pct": 0.19229945852518368
+  },
+  {
+   "label": "W_air-0.004 kg/kg",
+   "driver": "W_air_down",
+   "t_dry_h": 57.30287728456426,
+   "rel_pct": -0.17623983348444477
+  },
+  {
+   "label": "h_m x1.2",
+   "driver": "hm_up",
+   "t_dry_h": 56.35647393896951,
+   "rel_pct": -1.8249099364233592
+  },
+  {
+   "label": "h_m x0.8",
+   "driver": "hm_down",
+   "t_dry_h": 59.11066550280215,
+   "rel_pct": 2.972995005685529
+  },
+  {
+   "label": "h x1.2",
+   "driver": "h_up",
+   "t_dry_h": 57.39101149875233,
+   "rel_pct": -0.022706728752481083
+  },
+  {
+   "label": "h x0.8",
+   "driver": "h_down",
+   "t_dry_h": 57.42376204543767,
+   "rel_pct": 0.0343459511924497
+  },
+  {
+   "label": "R(t) x1.05（基准问题四）",
+   "driver": "R_scale_up",
+   "t_dry_h": 55.802274811598316,
+   "rel_pct": 9.272530026969395
+  },
+  {
+   "label": "R(t) x0.95（基准问题四）",
+   "driver": "R_scale_down",
+   "t_dry_h": 46.55901156109641,
+   "rel_pct": -8.827713457687251
+  }
+ ],
+ "span_pct": {
+  "R(t)": 9.272530026969395,
+  "h_m": 2.972995005685529,
+  "T_air": 1.6438983421555038,
+  "W_air": 0.19229945852518368,
+  "h": 0.0343459511924497
+ },
+ "ranking": [
+  "R(t)",
+  "h_m",
+  "T_air",
+  "W_air",
+  "h"
+ ],
+ "elasticity_R": 1.8100243484656628,
+ "air_extrapolation_contrast": {
+  "last24_mean_c": 50.0095,
+  "last_value_c": 50.165,
+  "delta_c": 0.15549999999999642
+ },
+ "perturbations": {
+  "dT_air_c": 0.5,
+  "dW_air_kgkg": 0.004,
+  "coef_scale": [
+   1.2,
+   0.8
+  ],
+  "R_scale": [
+   1.05,
+   0.95
+  ]
+ }
+}

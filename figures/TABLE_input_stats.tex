@@ -1,0 +1,15 @@
+\begin{table}[H]
+  \centering
+  \caption{附件输入数据描述性统计}
+  \label{tab:input_stats}
+  \begin{tabular}{lrrrl}
+    \toprule
+    输入序列 & 样本数 & 起始或 3 h 值 & 末段值 & 备注 \\
+    \midrule
+    附件 1 热风温度 (°C) & 241 & 50.1950 & 50.0095 & 13020 s 起 \\
+    附件 1 热风含湿量 (kg/kg) & 241 & 0.04977 & 0.04999 & 13020 s 起 \\
+    附件 2 药材半径 (cm) & 145 & 2.000 & 1.198 & 6 h 时 1.374 \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}\footnotesize 数据来源：figures/problem\_2\_results.json 的 air (.n\_points / .T\_at\_10800 / .W\_at\_10800 / .T\_tail\_mean / .W\_tail\_mean / .tail\_t\_start\_s) 与 figures/problem\_4\_results.json 的 radius\_history (.n\_points / .R0\_cm / .R\_min\_cm / .R\_6h\_cm)。末段值对附件 1 为 tail\_t\_start\_s 之后各点的均值，对附件 2 为全程最小半径。
+\end{table}

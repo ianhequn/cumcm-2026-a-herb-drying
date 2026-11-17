@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8">
+<style>
+@page{margin:0}
+html,body{margin:0;padding:0;width:fit-content;height:fit-content;background:transparent}
+.fig,.fig *{font-family:"Times New Roman","SimSun","Songti SC","Microsoft YaHei",serif;
+  font-style:normal !important;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+/* 显式整数尺寸：fit-content 量出的内容盒只留 <3px 页面余量，打印会溢出到第 2 页 */
+/* 宽/最小字号须 ≤48.5，否则通栏后 p10 文字低于 8pt（fig_include_size 硬门禁） */
+.fig{width:648px;height:650px;padding:14px 12px;background:transparent}
+
+.wrap{width:624px;display:flex;flex-direction:column}
+.band{width:624px;display:flex;flex-direction:column}
+
+/* 节点：纯白底、直角、细黑边；层次靠线宽不靠灰阶 */
+.n{border:1px solid #000;background:#fff;color:#000;border-radius:0;
+  font-size:14px;font-weight:500;line-height:21px;padding:3px 10px;text-align:center;
+  width:auto;min-width:0}
+.n.focus{border:2px solid #000;font-weight:600}
+/* 打印重排时字形量度略变，禁止自动换行可锁定行数，避免内容溢出到第二页 */
+.n,.stg{white-space:nowrap}
+
+/* minmax(0,1fr)：nowrap 会把 1fr 的 min-content 下限顶高，导致同行列宽不等 */
+.row3,.st3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.row4,.st4{display:grid;grid-template-columns:repeat(4,150px);gap:8px}
+.row2,.st2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.row3,.row4,.row2{align-items:stretch}
+
+/* 阶段带：标签靠左排、主干竖线在中轴连续穿过，二者不共用同一水平通道 */
+.seg{position:relative;display:flex;padding:5px 0}
+.seg .stg{align-self:flex-start;font-size:14px;line-height:18px;letter-spacing:.09em;
+  border-left:3px solid #000;padding-left:8px}
+.seg .v{position:absolute;left:295px;top:0;bottom:0;width:1.8px;background:#000}
+.head{padding-top:0}
+.head .v{display:none}
+
+/* 竖线与实心箭头；箭头只放在节点行正上方，咬住节点顶边 */
+.lk,.up{display:flex;justify-content:center}
+.lk .l,.up .l{display:block;width:1.8px;height:16px;background:#000}
+.dn{display:flex;flex-direction:column;align-items:center}
+.dn .l{display:block;width:1.8px;height:16px;background:#000}
+.dn .h{display:block;width:0;height:0;border-top:7px solid #000;
+  border-left:5px solid transparent;border-right:5px solid transparent}
+
+/* 母线两端各留半个列宽，支线落在列中轴 */
+.bus{height:1.8px;background:#000}
+.bus3{margin:0 96px}
+.bus4{margin:0 71px}
+.bus2{margin:0 146px}
+</style></head>
+<body>
+<div class="fig" data-mh-quality="roadmap-v2" data-mh-palette="mono">
+<div class="wrap">
+
+  <div class="band">
+    <div class="seg head"><span class="stg" data-mh-role="stage">阶段一｜几何与数据输入</span><span class="v"></span></div>
+    <div class="row3" data-mh-row="1">
+      <div class="n" data-mh-node="true" data-mh-role="input">圆柱药材 L=25、R=2 cm<br>初温与初始含水率给定</div>
+      <div class="n" data-mh-node="true" data-mh-role="input">附件 1<br>烘房温度与含湿量时程</div>
+      <div class="n" data-mh-node="true" data-mh-role="input">附件 2<br>半径收缩曲线 R(t)</div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="st3"><div class="up"><span class="l"></span></div><div class="up"><span class="l"></span></div><div class="up"><span class="l"></span></div></div>
+    <div class="bus bus3"></div>
+    <div class="seg"><span class="stg" data-mh-role="stage">阶段二｜统一模型与坐标变换</span><span class="v"></span></div>
+    <div class="dn" data-mh-col="1"><span class="l"></span><span class="h"></span></div>
+    <div class="n" data-mh-node="true" data-mh-col="1">一维轴对称热质耦合方程<br>表面 Robin 通量、中心零梯度</div>
+    <div class="dn" data-mh-col="1"><span class="l"></span><span class="h"></span></div>
+    <div class="n focus" data-mh-node="true" data-mh-focus="true" data-mh-col="1">干质量坐标 s=(r/R)²<br>消去对流项，节点落在表面</div>
+  </div>
+
+  <div class="band">
+    <div class="seg"><span class="stg" data-mh-role="stage">阶段三｜数值求解框架</span><span class="v"></span></div>
+    <div class="dn" data-mh-col="1"><span class="l"></span><span class="h"></span></div>
+    <div class="n" data-mh-node="true" data-mh-col="1">有限体积离散、隐式后向 Euler<br>Picard 更新物性，三对角求解</div>
+  </div>
+
+  <div class="band">
+    <div class="seg"><span class="stg" data-mh-role="stage">阶段四｜四问逐层放开假设</span><span class="v"></span></div>
+    <div class="bus bus4"></div>
+    <div class="st4">
+      <div class="dn"><span class="l"></span><span class="h"></span></div>
+      <div class="dn"><span class="l"></span><span class="h"></span></div>
+      <div class="dn"><span class="l"></span><span class="h"></span></div>
+      <div class="dn"><span class="l"></span><span class="h"></span></div>
+    </div>
+    <div class="row4" data-mh-row="2">
+      <div class="n" data-mh-node="true">问题 1<br>附录 2 常物性<br>预热段温度与水分场</div>
+      <div class="n" data-mh-node="true">问题 2<br>附录 3 变物性<br>全过程耦合场</div>
+      <div class="n" data-mh-node="true">问题 3<br>判据 max C ≤ 0.15<br>零点求根定时长</div>
+      <div class="n" data-mh-node="true">问题 4<br>附录 4 与实测 R(t)<br>动边界与机制消融</div>
+    </div>
+    <div class="st4">
+      <div class="up"><span class="l"></span></div><div class="up"><span class="l"></span></div>
+      <div class="up"><span class="l"></span></div><div class="up"><span class="l"></span></div>
+    </div>
+    <div class="bus bus4"></div>
+  </div>
+
+  <div class="band">
+    <div class="seg"><span class="stg" data-mh-role="stage">阶段五｜校验与产出</span><span class="v"></span></div>
+    <div class="bus bus2"></div>
+    <div class="st2">
+      <div class="dn"><span class="l"></span><span class="h"></span></div>
+      <div class="dn"><span class="l"></span><span class="h"></span></div>
+    </div>
+    <div class="row2" data-mh-row="3">
+      <div class="n" data-mh-node="true" data-mh-role="validation">模型校验<br>解析解对照、干质量守恒、网格收敛</div>
+      <div class="n" data-mh-node="true" data-mh-role="output">结果产出<br>逐时场量表与烘干时长</div>
+    </div>
+  </div>
+
+</div>
+</div>
+</body></html>

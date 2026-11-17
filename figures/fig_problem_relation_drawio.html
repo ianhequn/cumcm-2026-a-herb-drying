@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8">
+<style>
+@page{size:632px 365px;margin:0}
+html,body{margin:0;padding:0;width:fit-content;height:fit-content;background:transparent}
+.fig,.fig *{font-family:"Times New Roman","SimSun","Songti SC","Microsoft YaHei",serif;
+  font-style:normal !important;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+/* 显式整数尺寸：fit-content 量出的内容盒只留 <3px 页面余量，打印会溢出到第 2 页 */
+.fig{width:632px;height:365px;padding:14px 20px;background:transparent}
+
+.wrap{width:592px;display:flex;flex-direction:column}
+
+/* 共享基座：四问共用的方程与离散，横跨全宽 */
+.kn{border:1px solid #000;background:#fff;color:#000;font-size:13px;font-weight:600;
+  line-height:20px;padding:3px 10px;text-align:center}
+
+.lkc{display:flex;justify-content:center}
+.lkc .l{display:block;width:1.8px;height:12px;background:#000}
+.dn{display:flex;flex-direction:column;align-items:center}
+.dn .l{display:block;width:1.8px;height:16px;background:#000}
+.dn .h{display:block;width:0;height:0;border-top:7px solid #000;
+  border-left:5px solid transparent;border-right:5px solid transparent}
+
+/* 矩阵：一列问题标签 + 三列属性，列宽固定以保证列轴对齐 */
+.mx{display:grid;grid-template-columns:85px repeat(3,161px);gap:8px;align-items:stretch}
+/* 扇出到四个表头：母线连接四列中轴，每个表头都有一条向下箭头。 */
+.fan{display:grid;grid-template-columns:85px repeat(3,161px);gap:0 8px}
+.fan .bus{grid-column:1/5;height:1.8px;background:#000;margin:0 42.5px}
+.fan .dn .l{height:12px}
+.hd{font-size:13px;line-height:18px;padding:0 10px 3px;border-bottom:1px solid #000;
+  text-align:center}
+.lb{border:1px solid #000;background:#fff;color:#000;font-size:13px;font-weight:600;
+  line-height:20px;padding:3px 10px;display:flex;align-items:center;justify-content:center;
+  height:100%}
+.c{border:1px solid #000;background:#fff;color:#000;font-size:13px;font-weight:500;
+  line-height:20px;padding:3px 10px;text-align:center}
+/* 打印重排时字形量度略变，禁止自动换行可锁定行数，避免内容溢出到第二页 */
+.kn,.hd,.lb,.c{white-space:nowrap}
+</style></head>
+<body>
+<div class="fig" data-mh-palette="mono">
+<div class="wrap">
+
+  <div class="kn" data-mh-node="true" data-mh-role="kernel">共享基座｜一维轴对称热质耦合方程、表面 Robin 通量与中心零梯度<br>干质量坐标 s=(r/R)²、有限体积隐式离散、Picard 更新物性、三对角求解</div>
+  <div class="lkc"><span class="l"></span></div>
+
+  <div class="fan">
+    <div class="bus"></div>
+    <div class="dn"><span class="l"></span><span class="h"></span></div>
+    <div class="dn"><span class="l"></span><span class="h"></span></div>
+    <div class="dn"><span class="l"></span><span class="h"></span></div>
+    <div class="dn"><span class="l"></span><span class="h"></span></div>
+  </div>
+
+  <div class="mx">
+    <div class="hd" data-mh-col="1">递进层级</div>
+    <div class="hd" data-mh-col="2">物性来源</div>
+    <div class="hd" data-mh-col="3">新放开的假设</div>
+    <div class="hd" data-mh-col="4">输出诉求</div>
+
+    <div class="lb" data-mh-node="true" data-mh-col="1" data-mh-row="1">问题 1</div>
+    <div class="c" data-mh-node="true" data-mh-col="2" data-mh-row="1">附录 2 常物性</div>
+    <div class="c" data-mh-node="true" data-mh-col="3" data-mh-row="1">基准情形<br>无附加假设</div>
+    <div class="c" data-mh-node="true" data-mh-col="4" data-mh-row="1">预热段温度与<br>含水率场</div>
+
+    <div class="lb" data-mh-node="true" data-mh-col="1" data-mh-row="2">问题 2</div>
+    <div class="c" data-mh-node="true" data-mh-col="2" data-mh-row="2">附录 3 变物性</div>
+    <div class="c" data-mh-node="true" data-mh-col="3" data-mh-row="2">物性随温度与<br>含水率变化</div>
+    <div class="c" data-mh-node="true" data-mh-col="4" data-mh-row="2">全过程耦合<br>温度与水分场</div>
+
+    <div class="lb" data-mh-node="true" data-mh-col="1" data-mh-row="3">问题 3</div>
+    <div class="c" data-mh-node="true" data-mh-col="2" data-mh-row="3">附录 3 变物性</div>
+    <div class="c" data-mh-node="true" data-mh-col="3" data-mh-row="3">引入终止判据<br>max C ≤ 0.15</div>
+    <div class="c" data-mh-node="true" data-mh-col="4" data-mh-row="3">烘干时长由<br>零点求根确定</div>
+
+    <div class="lb" data-mh-node="true" data-mh-col="1" data-mh-row="4">问题 4</div>
+    <div class="c" data-mh-node="true" data-mh-col="2" data-mh-row="4">附录 4 与<br>实测 R(t)</div>
+    <div class="c" data-mh-node="true" data-mh-col="3" data-mh-row="4">半径随时间收缩<br>形成动边界</div>
+    <div class="c" data-mh-node="true" data-mh-col="4" data-mh-row="4">收缩与变物性<br>机制消融对比</div>
+  </div>
+
+</div>
+</div>
+</body></html>

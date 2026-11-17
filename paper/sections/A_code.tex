@@ -1,0 +1,72 @@
+\section{程序结构与交付文件说明}
+
+本文的全部计算由一套 Python 程序完成，运行 \verb|code/main.py| 即可依次复现
+四问结果与全部检验。程序分工如下：\verb|params.py| 集中存放题给参数与三套
+物性闭合；\verb|utils.py| 提供附件插值、节点中心有限体积装配与三对角求解；
+\verb|problem1.py| 至 \verb|problem4.py| 分别对应四问，其中 \verb|problem1.py|
+另含 Bessel--Duhamel 解析解；\verb|problem3_sens.py| 执行单因子灵敏度重算；
+\verb|data_check.py| 与 \verb|sanity_check.py| 完成附件读入核对与结构性退化检验；
+\verb|constraint_audit.py| 从落盘结果重算全部数值约束。
+依赖版本记录在 \verb|code/requirements.txt|。
+
+\subsection*{支撑材料文件清单}
+支撑材料以 \verb|.zip| 压缩包提交，解压后保持以下目录结构：
+\begin{itemize}
+  \item \verb|code/|：\verb|main.py|、\verb|params.py|、\verb|utils.py|、
+  \verb|problem1.py| 至 \verb|problem4.py|、\verb|problem3_sens.py|、
+  \verb|data_check.py|、\verb|sanity_check.py|、\verb|constraint_audit.py| 和
+  \verb|requirements.txt|；
+  \item \verb|figures/|：正文 24 张图的 PDF 文件、对应绘图脚本、表格源文件及流程图源文件；
+  \item \verb|user_data/|：\verb|附件1.xlsx|、\verb|附件2.xlsx| 与
+  \verb|result1.xlsx| 至 \verb|result4.xlsx|；
+  \item 根目录文件：\verb|PROBLEM_FACTS.json|、\verb|DATA_PROFILE.json|、
+  \verb|requirements.txt|、\verb|README.txt| 和 \verb|AI工具使用详情.pdf|。
+\end{itemize}
+其中，\verb|README.txt| 说明运行环境与入口；两份 \verb|.json| 文件为当前程序读取的
+参数口径和数据行数配置，须与源代码一并保留。
+
+交付的四个结果文件为 \verb|result1.xlsx| 至 \verb|result4.xlsx|，
+依次对应四问，规模依次为
+$1800\times22$（温度、水分浓度两张工作表）、$10800\times22$（两张工作表）、
+$3446\times22$ 与 $3065\times23$，列数均按含时间列的表头长度计，
+全部数值保留四位小数。
+
+有一处交付文件之间的差异需要说明：问题二与问题三求解的是同一个初边值问题，
+但制表精度要求不同，前者取 $\Delta t=0.5$ s、后者取 $1$ s。
+在两文件重叠的 $60$ 至 $10800$ s 共 $180$ 个同列时刻上逐点比对，
+最大绝对差为 $2.0\times10^{-4}$，出现在 $t=60$ s，
+差值不小于 $10^{-4}$ 的时刻有 $162$ 个。因两文件均保留四位小数，
+该差异在末位上可见。其量级远小于时间步无关性给出的模型不确定度——
+$\Delta t$ 由 $4$ s 收到 $0.5$ s 只使 $t_{\mathrm{dry}}$ 改变
+$3.0\times10^{-3}$ h，故不影响任何结论。
+
+\section{核心程序源代码}
+
+\lstset{basicstyle=\scriptsize\ttfamily,breaklines=true,columns=fullflexible,keepspaces=true,numbers=left,numberstyle=\tiny\color{gray}}
+
+\subsection{参数与物性闭合 params.py}
+\lstinputlisting[language=Python]{../code/params.py}
+
+\subsection{插值、离散与求解内核 utils.py}
+\lstinputlisting[language=Python]{../code/utils.py}
+
+\subsection{问题一与解析校验 problem1.py}
+\lstinputlisting[language=Python]{../code/problem1.py}
+
+\subsection{问题二 problem2.py}
+\lstinputlisting[language=Python]{../code/problem2.py}
+
+\subsection{问题三 problem3.py}
+\lstinputlisting[language=Python]{../code/problem3.py}
+
+\subsection{问题四与消融实验 problem4.py}
+\lstinputlisting[language=Python]{../code/problem4.py}
+
+\subsection{灵敏度重算 problem3\_sens.py}
+\lstinputlisting[language=Python]{../code/problem3_sens.py}
+
+\subsection{结构性退化检验 sanity\_check.py}
+\lstinputlisting[language=Python]{../code/sanity_check.py}
+
+\subsection{主入口 main.py}
+\lstinputlisting[language=Python]{../code/main.py}

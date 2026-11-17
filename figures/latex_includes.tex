@@ -1,0 +1,198 @@
+% 数据图 include 片段（19 张 DATA 图，全部为矢量 PDF）
+% 用法：正文 \input 本文件对应段落，或直接复制单个 figure 环境。
+% 需要的宏包：graphicx、float。图片路径以论文主文件所在目录为基准，
+% 若主文件不在仓库根目录，请调整 \graphicspath 或下面的相对路径。
+% caption 均为 ≤20 字的中文名词短语；统计口径、数据来源与结论请写在正文，
+% 不要搬进 \caption{}。
+
+% ==== 数据处理 ============================================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_air_condition.pdf}
+  \caption{热风温度与含湿量时程}
+  \label{fig:air_condition}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_shrinkage_curve.pdf}
+  \caption{药材半径收缩曲线}
+  \label{fig:shrinkage_curve}
+\end{figure}
+
+% ==== 问题一 ==============================================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q1_field_T.pdf}
+  \caption{问题一温度场分布}
+  \label{fig:q1_field_T}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q1_field_C.pdf}
+  \caption{问题一含水率场分布}
+  \label{fig:q1_field_C}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q1_profiles.pdf}
+  \caption{问题一径向剖面族}
+  \label{fig:q1_profiles}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q1_penetration.pdf}
+  \caption{问题一热湿推进对比}
+  \label{fig:q1_penetration}
+\end{figure}
+
+% ==== 问题二 ==============================================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q2_field_T.pdf}
+  \caption{问题二温度场分布}
+  \label{fig:q2_field_T}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q2_field_C.pdf}
+  \caption{问题二含水率场分布}
+  \label{fig:q2_field_C}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q2_profiles.pdf}
+  \caption{问题二径向剖面族}
+  \label{fig:q2_profiles}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q2_props_evolution.pdf}
+  \caption{附录三物性随含水率变化}
+  \label{fig:q2_props_evolution}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q1q2_contrast.pdf}
+  \caption{常物性与变物性结果对照}
+  \label{fig:q1q2_contrast}
+\end{figure}
+
+% ==== 问题三 ==============================================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q3_field_C.pdf}
+  \caption{问题三全程含水率场}
+  \label{fig:q3_field_C}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q3_profiles_6h.pdf}
+  \caption{问题三每六小时径向剖面}
+  \label{fig:q3_profiles_6h}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q3_drying_kinetics.pdf}
+  \caption{问题三干燥动力学曲线}
+  \label{fig:q3_drying_kinetics}
+\end{figure}
+
+% ==== 问题四 ==============================================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q4_field_C_moving.pdf}
+  \caption{问题四移动边界含水率场}
+  \label{fig:q4_field_C_moving}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q4_ablation.pdf}
+  \caption{收缩与物性的加性分解}
+  \label{fig:q4_ablation}
+\end{figure}
+
+% ==== 模型校验与灵敏度 ====================================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_q1_analytic_val.pdf}
+  \caption{解析解与数值解对比}
+  \label{fig:q1_analytic_val}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_grid_convergence.pdf}
+  \caption{网格收敛性检验}
+  \label{fig:grid_convergence}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_sensitivity_tornado.pdf}
+  \caption{单因子灵敏度排序}
+  \label{fig:sensitivity_tornado}
+\end{figure}
+
+% ==== 技术路线与问题关系（HTML → 矢量 PDF） ================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.94\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_roadmap_drawio.pdf}
+  \caption{整体建模技术路线}
+  \label{fig:roadmap}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/fig_problem_relation_drawio.pdf}
+  \caption{四问关系与递进层次}
+  \label{fig:problem_relation}
+\end{figure}
+
+% ==== 几何与数值方法示意（TikZ → 矢量 PDF） ================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/tikz_cylinder_geometry.pdf}
+  \caption{圆柱几何与边界条件}
+  \label{fig:cylinder_geometry}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/tikz_coord_mapping.pdf}
+  \caption{干质量坐标映射关系}
+  \label{fig:coord_mapping}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth,height=0.8\textheight,keepaspectratio]{figures/tikz_fv_stencil.pdf}
+  \caption{有限体积控制体与通量}
+  \label{fig:fv_stencil}
+\end{figure}
+
+% ==== 三线表 ==============================================================
+% 13 张表已单独成文件，直接 \input 即可（每张自带 \caption 与 \label）：
+%   \input{figures/TABLE_input_stats.tex}     % 附件输入数据描述性统计
+%   \input{figures/TABLE_q1_T.tex}            % 问题一药材温度分布
+%   \input{figures/TABLE_q1_C.tex}            % 问题一药材水分浓度
+%   \input{figures/TABLE_q2_T.tex}            % 问题二药材温度分布
+%   \input{figures/TABLE_q2_C.tex}            % 问题二药材水分浓度
+%   \input{figures/TABLE_q3_C.tex}            % 问题三烘干过程水分浓度
+%   \input{figures/TABLE_q4_C.tex}            % 问题四烘干过程水分浓度
+%   \input{figures/TABLE_main_results.tex}    % 四问主结果汇总
+%   \input{figures/TABLE_ablation.tex}        % 问题四消融实验
+%   \input{figures/TABLE_sensitivity.tex}     % 单因子灵敏度汇总
+%   \input{figures/TABLE_grid.tex}            % 问题三网格收敛性
+%   \input{figures/TABLE_dt.tex}              % 问题三时间步收敛性
+%   \input{figures/TABLE_conservation.tex}    % 各问干质量守恒残差

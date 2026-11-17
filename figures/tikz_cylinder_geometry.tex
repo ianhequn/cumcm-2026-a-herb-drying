@@ -1,0 +1,64 @@
+\documentclass[tikz,border=3pt]{standalone}
+\usepackage{fontspec}
+\setmainfont{SimSun}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,intersections}
+
+% purpose: geometry of the cylindrical herb slice and its boundary conditions
+% topology: geometry -- one continuous scene, axial view beside cross section
+% style_family: C mono line art, only black and white, no gray fills
+% result_policy: only given geometry and boundary types, no computed values
+% final_width: 0.86 textwidth ; print_mode: grayscale safe
+% MH-TIKZ-ABSOLUTE-OK: geometric relations are the semantics here
+
+\begin{document}
+\adjustbox{max width=\textwidth}{%
+\begin{tikzpicture}[
+  line cap=round,
+  every node/.style={font=\normalsize,inner sep=1.6pt},
+  wall/.style={line width=0.9pt},
+  axline/.style={line width=0.5pt,dash pattern=on 5pt off 2pt on 1pt off 2pt},
+  fx/.style={-{Latex[length=2mm,width=1.4mm]},line width=0.6pt},
+  dim/.style={{Latex[length=1.8mm]}-{Latex[length=1.8mm]},line width=0.45pt},
+  lead/.style={line width=0.4pt},
+  note/.style={draw,line width=0.5pt,dash pattern=on 3pt off 2pt,
+    align=left,inner sep=4.5pt,font=\normalsize}
+]
+
+% ---------- 纵剖面 ----------
+\draw[wall] (0,0) rectangle (5.4,1.7);
+\draw[axline] (-0.55,0.85) -- (5.75,0.85);
+\node[above right] at (0.12,0.88) {对称轴};
+
+\draw[fx] (4.6,0.85) -- (4.6,1.66) node[midway,right] {$r$};
+
+\foreach \x in {0.8,1.5,2.2}{\draw[fx] (\x,2.35) -- (\x,1.76);}
+\foreach \x in {3.2,3.9,4.6}{\draw[fx] (\x,1.76) -- (\x,2.35);}
+\node[above] at (1.5,2.45) {热流入};
+\node[above] at (3.9,2.45) {水汽蒸发};
+
+\draw[dim] (0,-0.5) -- (5.4,-0.5);
+\node[below] at (2.7,-0.5) {$L=25$ cm};
+\draw[dim] (5.95,0) -- (5.95,1.7);
+\node[above] at (5.95,1.7) {$2R=4$ cm};
+
+% ---------- 横截面 ----------
+\draw[wall] (8.6,0.85) circle[radius=1.35];
+\fill (8.6,0.85) circle[radius=1.3pt];
+\foreach \a in {30,90,150,210,270,330}{
+  \draw[fx] (8.6,0.85)++(\a:1.80) -- ++(\a:-0.35);}
+\draw[fx] (8.6,0.85) -- ++(130:1.35) node[midway,above left,inner sep=1pt] {$r$};
+\draw[dim] (8.6,0.85) -- (9.95,0.85) node[midway,above] {$R$};
+\draw[lead] (8.53,0.79) -- (8.02,0.45);
+\node at (7.72,0.33) {$r=0$};
+\node[above] at (8.6,2.72) {横截面：表面 Robin 通量};
+
+% ---------- 边界条件与降维依据 ----------
+\node[note,minimum width=8.6cm,minimum height=1.75cm] at (4.3,-1.85)
+  {表面 $r=R$：$-\lambda\,\partial T/\partial r=h_T\,(T_a-T_s)$\\[2.5pt]
+   中心 $r=0$：$\partial T/\partial r=\partial C/\partial r=0$\\[2.5pt]
+   $L\gg 2R$，端面换热占比小，降为一维径向模型};
+
+\end{tikzpicture}
+}%
+\end{document}

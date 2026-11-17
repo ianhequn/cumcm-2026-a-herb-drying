@@ -1,0 +1,93 @@
+{
+ "meta": {
+  "section": "structural_verification",
+  "source": "MODELING_REPORT.md",
+  "n_checks": 4,
+  "n_pass": 4,
+  "runtime_s": 37.03
+ },
+ "checks": [
+  {
+   "name": "zero_input_degeneracy",
+   "max_dT": 2.5224267119483557e-13,
+   "max_dC": 4.440892098500626e-15,
+   "tol": 1e-10,
+   "pass": true
+  },
+  {
+   "name": "constant_air_lambda1",
+   "zeta_1": 1.418472518827063,
+   "lambda_1": 0.0008493704774863196,
+   "lambda_fit": 0.0008491865837660297,
+   "rel_dev": 0.00021650590073971068,
+   "fit_window_s": [
+    2000.0,
+    6000.0
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "name": "pure_diffusion_conservation",
+   "Cbar_0": 2.55,
+   "Cbar_end": 2.549999999999971,
+   "rel_drift": 1.1319921035393754e-14,
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "shrinkage_off_reproduces_q3",
+   "t_dry_shrinkage_off_h": 57.404046079788614,
+   "t_dry_q3_h": 57.404046079788614,
+   "rel_dev": 0.0,
+   "n_cells": 112,
+   "tol": 1e-06,
+   "pass": true
+  }
+ ],
+ "grid_independence": {
+  "problem3": {
+   "N": [
+    48,
+    80,
+    112,
+    160,
+    224
+   ],
+   "t_dry_h": [
+    57.29675022029298,
+    57.373785374974084,
+    57.404046079788614,
+    57.42473190216783,
+    57.43701365112573
+   ],
+   "rel_diff": [
+    0.0013426890726772178,
+    0.000527152820769283,
+    0.0003602249709141959,
+    0.00021382986644297348
+   ],
+   "monotone_decreasing": true,
+   "last_within_tol": true
+  },
+  "problem4": {
+   "N": [
+    48,
+    112,
+    160
+   ],
+   "t_dry_h": [
+    51.04245523801786,
+    51.067065801282205,
+    51.071109883479345
+   ],
+   "rel_diff": [
+    0.00048192632331987964,
+    7.918532035757334e-05
+   ],
+   "monotone_decreasing": true,
+   "last_within_tol": true
+  }
+ },
+ "all_pass": true
+}

@@ -1,0 +1,74 @@
+\documentclass[tikz,border=3pt]{standalone}
+\usepackage{fontspec}
+\setmainfont{SimSun}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,intersections}
+
+% purpose: finite volume control volumes and the three point coupling on the s grid
+% topology: geometry -- one control volume string with interface fluxes
+% style_family: C mono line art, only black and white, no gray fills
+% result_policy: only the discrete scheme, no computed values
+% final_width: 0.84 textwidth ; print_mode: grayscale safe
+% MH-TIKZ-ABSOLUTE-OK: cell positions are the semantics here
+
+\begin{document}
+\adjustbox{max width=\textwidth}{%
+\begin{tikzpicture}[
+  line cap=round,
+  every node/.style={font=\normalsize,inner sep=1.6pt},
+  wall/.style={line width=0.9pt},
+  face/.style={line width=0.55pt},
+  half/.style={line width=1.6pt},
+  fx/.style={-{Latex[length=2mm,width=1.4mm]},line width=0.6pt},
+  ax/.style={-{Latex[length=2mm,width=1.4mm]},line width=0.6pt},
+  tk/.style={line width=0.7pt},
+  lead/.style={line width=0.4pt},
+  note/.style={draw,line width=0.5pt,dash pattern=on 3pt off 2pt,
+    align=left,inner sep=4.5pt,font=\normalsize}
+]
+
+% ---------- 控制体串 ----------
+\draw[wall] (0,1.6) rectangle (9.6,2.6);
+\foreach \x in {0.8,2.4,4.0,5.6,7.2,8.8}{\draw[face] (\x,1.6) -- (\x,2.6);}
+\draw[half] (8.8,1.6) rectangle (9.6,2.6);
+\draw[half] (0,1.6) -- (0,2.6);
+
+\node at (0.4,2.32) {$1$};
+\node at (1.6,2.32) {$\cdots$};
+\node at (3.2,2.32) {$i-1$};
+\node at (4.8,2.32) {$i$};
+\node at (6.4,2.32) {$i+1$};
+\node at (8.0,2.32) {$\cdots$};
+\node at (9.2,2.32) {$N$};
+
+\draw[fx] (3.72,1.85) -- (4.28,1.85);
+\draw[fx] (5.32,1.85) -- (5.88,1.85);
+\draw[fx] (9.32,1.85) -- (9.95,1.85);
+
+\draw[lead] (0.05,1.56) -- (0.60,1.42);
+\node at (1.35,1.3) {$F_{1/2}=0$};
+\node at (4.0,1.3) {$F_{i-1/2}$};
+\node at (5.6,1.3) {$F_{i+1/2}$};
+\node at (9.9,1.3) {$F_{N+1/2}$};
+
+\draw[lead] (9.1,2.78) -- (9.2,2.62);
+\node at (9.1,2.95) {表面半控制体};
+
+% ---------- s 轴 ----------
+\draw[ax] (-0.35,0.35) -- (9.95,0.35);
+\draw[tk] (0,0.35) -- (0,0.57);
+\draw[tk] (9.6,0.35) -- (9.6,0.57);
+\node at (0.7,0.02) {$s=0$（中心）};
+\node at (8.9,0.02) {$s=1$（表面）};
+
+% ---------- 离散格式 ----------
+\node[note,minimum width=9.6cm,minimum height=1.9cm,inner xsep=9pt] at (4.8,-1.95)
+  {控制体守恒：$(u_i^{n+1}-u_i^n)\Delta s_i/\Delta t=F_{i-1/2}-F_{i+1/2}$\\[3pt]
+   表面 $F_{N+1/2}$ 取 Robin 通量，中心 $F_{1/2}=0$\\[3pt]
+   隐式后向 Euler，三对角求解，Picard 更新物性};
+
+\node at (4.8,3.1) {控制体等步长划分，两端为半控制体};
+
+\end{tikzpicture}
+}%
+\end{document}

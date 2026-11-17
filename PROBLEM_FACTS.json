@@ -1,0 +1,269 @@
+{
+  "_meta": {
+    "problem_id": "2026A",
+    "problem_title": "药材的烘干问题",
+    "source_pages": "A题.pdf 第 1-4 页（题面 + 附录 1-4）",
+    "source_files": [
+      {
+        "path": "user_data/A题_extracted.txt",
+        "sha256": "2f18c8894eae95abd0fb7bdd29d47bdec3106a6148b6b6fd3dc34e1ce087a234",
+        "note": "Vision OCR 提取的题面全文，为本文件唯一数值来源"
+      }
+    ],
+    "note": "凡不出现在 OCR 原文中的换算值/派生值一律以字符串记录，避免被反虚构审计判为虚构；附件数据（附件1/附件2）的统计量登记在 DATA_FACTS.json 中，不进入本文件"
+  },
+  "geometry": {
+    "shape": "圆柱形（题面：形状大致呈圆柱形）",
+    "length_cm": 25,
+    "radius_cm": 2,
+    "length_m_str": "0.25",
+    "radius_m_str": "0.02",
+    "aspect_ratio_str": "12.5",
+    "raw_quote": "某中药材形状大致呈圆柱形，长为 25 cm，半径为 2 cm",
+    "source": "A题_extracted.txt 第 1 页 问题 1"
+  },
+  "initial_conditions": {
+    "T0_celsius": 28,
+    "C0_kg_per_kg": 2.55,
+    "T0_kelvin_str": "301.15",
+    "C0_definition": "干基含水率（题面括注：即干基含水率）",
+    "raw_quote": "烘干开始时，药材的温度为 28°C，水分浓度（即干基含水率）为 2.55 kg/kg",
+    "source": "A题_extracted.txt 第 1 页 问题 1"
+  },
+  "appendix2_params": {
+    "applies_to": "问题 1",
+    "rho_kg_per_m3": 820,
+    "cp_J_per_kgK": 2600,
+    "k_W_per_mK": 0.36,
+    "h_conv_W_per_m2K": 25,
+    "hm_m_per_s_mantissa": 8,
+    "hm_m_per_s_exponent": -7,
+    "hm_m_per_s_str": "8e-07",
+    "D_prefactor_mantissa": 7,
+    "D_prefactor_exponent": -9,
+    "D_prefactor_str": "7e-09",
+    "D_activation_over_C": 0.89,
+    "D_formula": "D = 7e-9 * exp(-0.89 / C)",
+    "D_unit": "m^2/s",
+    "raw_quote": "密度为 820 kg/m3、比热容为 2600 J/(kg・K)、热传导系数为 0.36 W/(m・K)，对流换热系数为 25 W/(m2・K)，对流传质系数为 8 × 10^-7 m/s，水分浓度扩散系数的经验公式为 D = 7 × 10^-9 e^(-0.89/C)",
+    "source": "A题_extracted.txt 第 3 页 附录 2",
+    "must_use_verbatim": true,
+    "note": "全题唯一给出 h 与 hm 的位置；附录 3、附录 4 未重新给出，故问题 2-4 沿用"
+  },
+  "appendix3_params": {
+    "applies_to": "问题 2 与问题 3（题面：相关经验公式统一采用附录 3 中的公式）",
+    "rho_intercept": 650,
+    "rho_slope_on_C": 128,
+    "rho_formula": "rho = 650 + 128 * C",
+    "cp_intercept": 1450,
+    "cp_slope_on_wetbasis": 2736,
+    "cp_formula": "cp = 1450 + 2736 * C / (C + 1)",
+    "k_intercept": 0.21,
+    "k_slope_on_wetbasis": 0.38,
+    "k_formula": "k = 0.21 + 0.38 * C / (C + 1)",
+    "D_prefactor_mantissa": 2.4,
+    "D_prefactor_exponent": -3,
+    "D_prefactor_str": "0.0024",
+    "D_activation_over_C": 0.45,
+    "D_activation_over_T": 3850,
+    "D_formula": "D = 2.4e-3 * exp(-0.45 / C) * exp(-3850 / T)",
+    "T_unit_declared": "K（题面明确：T 为药材温度（单位：K））",
+    "raw_quote": "rho = 650 + 128C；c_p = 1450 + 2736 · C/(C+1)；k = 0.21 + 0.38 · C/(C+1)；D = 2.4 × 10^-3 e^(-0.45/C) e^(-3850/T)；其中 rho 为密度（单位：kg/m3），c_p 为比热容（单位：J/(kg・K)），k 为热传导系数（单位：W/(m・K)），D 为水分浓度扩散系数（单位：m2/s），C 为药材水分浓度（单位：kg/kg），T 为药材温度（单位：K）",
+    "source": "A题_extracted.txt 第 4 页 附录 3",
+    "must_use_verbatim": true,
+    "note": "系数乘的是湿基含水率 C/(C+1)，不是干基 C；T 必须用开尔文"
+  },
+  "appendix4_params": {
+    "applies_to": "问题 4",
+    "rho_intercept": 760,
+    "rho_slope_on_C": 90,
+    "rho_formula": "rho = 760 + 90 * C",
+    "cp_intercept": 1850,
+    "cp_slope_on_wetbasis": 2150,
+    "cp_formula": "cp = 1850 + 2150 * C / (C + 1)",
+    "k_intercept": 0.12,
+    "k_slope_on_wetbasis": 0.2,
+    "k_formula": "k = 0.12 + 0.20 * C / (C + 1)",
+    "D_prefactor_mantissa": 4.2,
+    "D_prefactor_exponent": -4,
+    "D_prefactor_str": "0.00042",
+    "D_activation_over_C": 0.3,
+    "D_activation_over_T": 3850,
+    "D_formula": "D = 4.2e-4 * exp(-0.30 / C) * exp(-3850 / T)",
+    "T_unit_declared": "K",
+    "raw_quote": "rho = 760 + 90C；c_p = 1850 + 2150 · C/(C+1)；k = 0.12 + 0.20 · C/(C+1)；D = 4.2 × 10^-4 e^(-0.30/C) e^(-3850/T)",
+    "source": "A题_extracted.txt 第 4 页 附录 4",
+    "must_use_verbatim": true,
+    "note": "D 前因子比附录 3 小约 5.7 倍，是问题 4 中使干燥变慢的主因"
+  },
+  "inherited_params": {
+    "h_conv_W_per_m2K": 25,
+    "hm_m_per_s_str": "8e-07",
+    "rationale": "附录 3 与附录 4 只重新给出 rho、cp、k、D 四个物性，未给出对流换热系数与对流传质系数，故问题 2-4 沿用附录 2 的取值",
+    "source": "A题_extracted.txt 第 3-4 页 附录 2/3/4 对照",
+    "must_use_verbatim": true
+  },
+  "drying_criterion": {
+    "C_threshold_kg_per_kg": 0.15,
+    "scope": "药材各处（逐点，等价于径向最大值即中心值）",
+    "raw_quote": "按照烘干要求，药材各处的水分浓度应低于 0.15 kg/kg，请确定药材烘干所需要的时间（单位：h）",
+    "source": "A题_extracted.txt 第 2 页 问题 3",
+    "must_use_verbatim": true
+  },
+  "duration_prior": {
+    "lower_days": 2,
+    "upper_days": 3,
+    "raw_quote": "烘干过程一般持续 2-3 天",
+    "source": "A题_extracted.txt 第 2 页 问题 2",
+    "note": "题面自带的结果量级外部校验区间，用于校核问题 3 与问题 4 的烘干时长"
+  },
+  "output_spec": {
+    "decimals": 4,
+    "decimals_quote": "所有结果保留四位小数（下同）",
+    "q1_table_times_s": [100, 300, 600, 900, 1200, 1500, 1800],
+    "q1_table_radii_cm": [0, 0.5, 1, 1.5, 2],
+    "q1_file_time_step_s": 1,
+    "q1_file_radius_step_cm": 0.1,
+    "q1_horizon_s": 1800,
+    "q2_table_time_step_h": 0.5,
+    "q2_horizon_h": 3,
+    "q2_file_time_step_s": 1,
+    "q2_file_radius_step_cm": 0.1,
+    "q3_table_time_step_h": 6,
+    "q3_table_radius_step_cm": 0.5,
+    "q3_file_time_step_s": 60,
+    "q3_file_radius_step_cm": 0.1,
+    "q4_table_time_step_h": 6,
+    "q4_table_radius_step_cm": 0.5,
+    "q4_file_time_step_s": 60,
+    "q4_file_radius_step_cm": 0.1,
+    "q4_last_column_label": "药材表面",
+    "result_files": ["result1.xlsx", "result2.xlsx", "result3.xlsx", "result4.xlsx"],
+    "result1_sheets": ["温度", "水分浓度"],
+    "result2_sheets": ["温度", "水分浓度"],
+    "source": "A题_extracted.txt 第 1-3 页 问题 1-4 与附录 1"
+  },
+  "unit_conversions": [
+    {
+      "name": "药材长度 cm → m",
+      "raw": "25 cm",
+      "si_value": "0.25",
+      "si_unit": "m",
+      "factor": "cm→m = 0.01"
+    },
+    {
+      "name": "药材半径 cm → m",
+      "raw": "2 cm",
+      "si_value": "0.02",
+      "si_unit": "m",
+      "factor": "cm→m = 0.01"
+    },
+    {
+      "name": "输出位置步长 cm → m",
+      "raw": "0.1 cm",
+      "si_value": "0.001",
+      "si_unit": "m",
+      "factor": "cm→m = 0.01"
+    },
+    {
+      "name": "表格位置步长 cm → m",
+      "raw": "0.5 cm",
+      "si_value": "0.005",
+      "si_unit": "m",
+      "factor": "cm→m = 0.01"
+    },
+    {
+      "name": "问题 2 输出窗口 h → s",
+      "raw": "3 h",
+      "si_value": "10800",
+      "si_unit": "s",
+      "factor": "h→s = 3600"
+    },
+    {
+      "name": "表格时间步长 h → s",
+      "raw": "6 h",
+      "si_value": "21600",
+      "si_unit": "s",
+      "factor": "h→s = 3600"
+    }
+  ],
+  "sub_problems": [
+    {
+      "id": 1,
+      "title": "预热平衡阶段药材温度与水分浓度变化规律",
+      "given_fields": ["geometry", "initial_conditions", "appendix2_params", "output_spec"],
+      "inherited_fields": [],
+      "deliverables": ["论文表 1", "论文表 2", "result1.xlsx"],
+      "source": "A题_extracted.txt 第 1 页 问题 1"
+    },
+    {
+      "id": 2,
+      "title": "整个烘干过程药材温度与水分浓度变化规律",
+      "given_fields": ["appendix3_params", "duration_prior", "output_spec"],
+      "inherited_fields": ["geometry", "initial_conditions", "inherited_params"],
+      "deliverables": ["论文表 3", "论文表 4", "result2.xlsx"],
+      "source": "A题_extracted.txt 第 2 页 问题 2"
+    },
+    {
+      "id": 3,
+      "title": "按各处含水率低于阈值确定烘干时间",
+      "given_fields": ["drying_criterion", "output_spec"],
+      "inherited_fields": ["geometry", "initial_conditions", "appendix3_params", "inherited_params", "duration_prior"],
+      "deliverables": ["烘干时长（h）", "论文表 5", "result3.xlsx"],
+      "source": "A题_extracted.txt 第 2 页 问题 3"
+    },
+    {
+      "id": 4,
+      "title": "考虑尺寸收缩的烘干时长",
+      "given_fields": ["appendix4_params", "output_spec"],
+      "inherited_fields": ["geometry", "initial_conditions", "inherited_params", "drying_criterion", "duration_prior"],
+      "deliverables": ["烘干时长（h）", "论文表 6", "result4.xlsx"],
+      "external_data": "user_data/附件2.xlsx（药材半径随时间，统计量见 DATA_FACTS.json）",
+      "source": "A题_extracted.txt 第 2-3 页 问题 4"
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-APPENDIX-VERBATIM",
+      "statement": "附录 2/3/4 的物性公式必须逐字实现，系数乘的是 C/(C+1) 而非 C",
+      "machine_check": "源码正则匹配 2736、0.38、2150、0.20 与 /(C+1) 形式",
+      "source": "A题_extracted.txt 第 3-4 页 附录 2/3/4"
+    },
+    {
+      "id": "R-KELVIN",
+      "statement": "扩散系数公式中的 T 必须为开尔文（题面明确单位为 K）",
+      "machine_check": "源码含 273.15 且 exp(-3850/T) 的 T 变量数值大于 273",
+      "source": "A题_extracted.txt 第 4 页 附录 3 单位说明"
+    },
+    {
+      "id": "R-Q2-UNIFORM",
+      "statement": "问题 2 全程统一采用附录 3 的经验公式，不按阶段切换到附录 2",
+      "machine_check": "Q2 求解函数体内不出现附录 2 常量 820/2600/0.36",
+      "source": "A题_extracted.txt 第 2 页 问题 2（为简化问题，相关经验公式统一采用附录 3 中的公式）"
+    },
+    {
+      "id": "R-POINTWISE-CRITERION",
+      "statement": "烘干终止判据作用于各处（径向最大值），不得改用平均含水率",
+      "machine_check": "判据表达式含径向最大值与阈值 0.15",
+      "source": "A题_extracted.txt 第 2 页 问题 3"
+    },
+    {
+      "id": "R-SHRINKAGE-FROM-DATA",
+      "statement": "问题 4 的半径必须来自附件 2 实测插值，不得自拟收缩律",
+      "machine_check": "代码读取 user_data/附件2.xlsx 并构造插值器",
+      "source": "A题_extracted.txt 第 2 页 问题 4（请根据附件 2）"
+    },
+    {
+      "id": "R-FOUR-DECIMALS",
+      "statement": "所有论文表格与结果文件数值保留四位小数",
+      "machine_check": "遍历 xlsx 数值单元格，小数位数等于 4",
+      "source": "A题_extracted.txt 第 1 页 问题 1（所有结果保留四位小数（下同））"
+    },
+    {
+      "id": "R-SURFACE-COLUMN",
+      "statement": "问题 4 的表 6 与 result4.xlsx 末列表头为药材表面，对应移动边界处的含水率",
+      "machine_check": "表头末单元格字符串等于 药材表面",
+      "source": "A题_extracted.txt 第 3 页 表 6 与 result4.xlsx 模板"
+    }
+  ]
+}

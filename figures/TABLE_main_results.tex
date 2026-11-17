@@ -1,0 +1,16 @@
+\begin{table}[H]
+  \centering
+  \caption{四问主结果汇总}
+  \label{tab:main_results}
+  \begin{tabular}{lllrr}
+    \toprule
+    问题 & 物性闭合 & 几何 & 时间跨度或 $t_{\mathrm{dry}}$ & 结束时 $\max_r C$ \\
+    \midrule
+    问题一 & 附录 2 常物性 & 固定 $R$ & 1800 s & -- \\
+    问题二 & 附录 3 变物性 & 固定 $R$ & 3 h & -- \\
+    问题三 & 附录 3 变物性 & 固定 $R$ & 57.4247 h & 0.1500 \\
+    问题四 & 附录 4 变物性 & $R(t)$ 收缩 & 51.0711 h & 0.1500 \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}\footnotesize 数据来源：figures/problem\_$k$\_results.json（$k=1,2,3,4$）的 table\_times\_s / table\_times\_h / t\_dry\_h / C\_max\_at\_end；问题一、二为指定时间跨度，不涉及干燥判据。
+\end{table}

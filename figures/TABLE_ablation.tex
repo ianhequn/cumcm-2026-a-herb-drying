@@ -1,0 +1,16 @@
+\begin{table}[H]
+  \centering
+  \caption{问题四消融实验}
+  \label{tab:ablation}
+  \begin{tabular}{lrr}
+    \toprule
+    工况组合 & $t_{\mathrm{dry}}$ (h) & 相对基准 (\%) \\
+    \midrule
+    固定半径 + 附录 3（问题三基准） & 57.4040 & 0.0000 \\
+    收缩 + 附录 3 基准物性 & 25.2269 & -56.0538 \\
+    固定半径 + 换附录 4 物性 & 129.7587 & 126.0445 \\
+    收缩 + 附录 4（完整） & 51.0671 & -11.0393 \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}\footnotesize 数据来源：figures/problem\_4\_results.json 的 ablation (.baseline\_h / .shrink\_only\_h / .props\_only\_h / .full\_h 与对应 \_pct)；交互项 -46.5145 h 为四者的加性分解残差，亦取自同字段 .interaction\_h。
+\end{table}

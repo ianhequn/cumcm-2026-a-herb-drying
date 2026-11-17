@@ -1,0 +1,61 @@
+\documentclass[tikz,border=3pt]{standalone}
+\usepackage{fontspec}
+\setmainfont{SimSun}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,intersections}
+
+% purpose: how the dry-mass coordinate maps the shrinking radius onto a fixed interval
+% topology: geometry -- two parallel axes with a monotone mapping between them
+% style_family: C mono line art, only black and white, no gray fills
+% result_policy: only the given transform and grid layout, no computed values
+% final_width: 0.84 textwidth ; print_mode: grayscale safe
+% MH-TIKZ-ABSOLUTE-OK: the tick positions carry the meaning of the mapping
+
+\begin{document}
+\adjustbox{max width=\textwidth}{%
+\begin{tikzpicture}[
+  line cap=round,
+  every node/.style={font=\normalsize,inner sep=1.6pt},
+  ax/.style={-{Latex[length=2mm,width=1.4mm]},line width=0.8pt},
+  tk/.style={line width=0.8pt},
+  map/.style={line width=0.35pt,dash pattern=on 2pt off 1.6pt},
+  note/.style={draw,line width=0.5pt,dash pattern=on 3pt off 2pt,
+    align=left,inner sep=4.5pt,font=\normalsize}
+]
+
+% ---------- 物理域 r ----------
+\draw[ax] (-0.4,2.6) -- (9.85,2.6);
+\foreach \x in {0,2.846,4.024,4.929,5.692,6.364,6.976,7.533,8.050,8.538,9.0}{
+  \draw[tk] (\x,2.6) -- (\x,2.84);}
+\node[above] at (0,2.88) {$0$};
+\node[above] at (9,2.88) {$R(t)$};
+\node[above] at (4.5,3.66) {物理域 $r$：等 $s$ 网格在表面附近自动加密};
+
+% ---------- 映射 ----------
+\draw[map] (0,2.6) -- (0,0.9);
+\draw[map] (2.846,2.6) -- (0.9,0.9);
+\draw[map] (4.024,2.6) -- (1.8,0.9);
+\draw[map] (4.929,2.6) -- (2.7,0.9);
+\draw[map] (5.692,2.6) -- (3.6,0.9);
+\draw[map] (6.364,2.6) -- (4.5,0.9);
+\draw[map] (6.976,2.6) -- (5.4,0.9);
+\draw[map] (7.533,2.6) -- (6.3,0.9);
+\draw[map] (8.050,2.6) -- (7.2,0.9);
+\draw[map] (8.538,2.6) -- (8.1,0.9);
+\draw[map] (9.0,2.6) -- (9.0,0.9);
+
+% ---------- 计算域 s ----------
+\draw[ax] (-0.4,0.9) -- (9.85,0.9);
+\foreach \x in {0,0.9,1.8,2.7,3.6,4.5,5.4,6.3,7.2,8.1,9.0}{
+  \draw[tk] (\x,0.9) -- (\x,0.66);}
+\node[below] at (0,0.6) {$0$};
+\node[below] at (9.0,0.6) {$1$};
+\node[below] at (4.5,-0.3) {计算域 $s=(r/R(t))^2$：等步长 $\Delta s$ 均匀划分};
+
+\node[note,minimum width=9.6cm,minimum height=1.4cm,inner xsep=9pt] at (4.5,-1.7)
+  {一、$R(t)$ 收缩被吸收进坐标，动边界化为固定区间\\[3pt]
+   二、消去对流项，表面节点恒落在 $s=1$};
+
+\end{tikzpicture}
+}%
+\end{document}
